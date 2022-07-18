@@ -1,0 +1,6 @@
+pip==22.1.2
+setuptools==62.6.0
+soupsieve==2.3.2.post1
+wheel==0.37.1
+beautifulsoup4==4.11.1
+python-dotenv==0.20.0
