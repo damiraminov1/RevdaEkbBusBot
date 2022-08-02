@@ -28,12 +28,13 @@ async def start(message: types.Message):
 async def main(message: types.Message):
     if message.text in buttons.values():
         data = Parser.get_content(url=Config.HOST)
-        if message.text == buttons['from_revda']:
-            answer = data['price'] + '\n' + data['from_revda'] + '\n' + data['additional_information']
-            await message.answer(answer)
-        elif message.text == buttons['from_ekb']:
-            answer = data['price'] + '\n' + data['from_ekb'] + '\n' + data['additional_information']
-            await message.answer(answer)
-        elif message.text == buttons['full_schedule']:
-            answer = data['price'] + '\n' + data['full_schedule'] + '\n' + data['additional_information']
-            await message.answer(answer)
+        if data['status'] != 'failed':
+            if message.text == buttons['from_revda']:
+                answer = data['price'] + '\n' + data['from_revda'] + '\n' + data['additional_information']
+                await message.answer(answer)
+            elif message.text == buttons['from_ekb']:
+                answer = data['price'] + '\n' + data['from_ekb'] + '\n' + data['additional_information']
+                await message.answer(answer)
+            elif message.text == buttons['full_schedule']:
+                answer = data['price'] + '\n' + data['full_schedule'] + '\n' + data['additional_information']
+                await message.answer(answer)
