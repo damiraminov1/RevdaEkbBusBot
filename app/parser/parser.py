@@ -35,7 +35,7 @@ class Parser:
                     lst = i.text.split('\n')
                     for m in lst:
                         has_additional_info = True
-                        for l in ['Цена', 'Рублей', 'цена', 'рублей']:
+                        for l in ['Цена:', 'цена:']:
                             if l in m:
                                 data['price'] = m
                                 has_additional_info = False
