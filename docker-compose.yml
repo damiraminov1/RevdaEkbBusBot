@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  server:
+    build: .
+    restart: on-failure
+    container_name: "revda_ekb_bus_bot"
+    command:
+      - python run.py
+    volumes:
+      - .:/revda_ekb_bus_bot
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
