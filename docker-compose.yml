@@ -5,8 +5,7 @@ services:
     build: .
     restart: on-failure
     container_name: "revda_ekb_bus_bot"
-    command:
-      - python run.py
+    command: python run.py
     volumes:
       - .:/revda_ekb_bus_bot
     environment:
