@@ -1,3 +1,5 @@
+import re
+
 import requests
 from bs4 import BeautifulSoup
 from config import Config
@@ -29,29 +31,16 @@ class Parser:
                 'from_ekb': str(),
                 'additional_information': str(),
                 'status': str()}
-        for i in soup.find_all('div', attrs={'class': 'su-spoiler-content su-u-clearfix su-u-trim'}):
-            for j in ['Северный', 'Северного']:
-                if j in str(i):
-                    lst = i.text.split('\n')
-                    for m in lst:
-                        has_additional_info = True
-                        for l in ['Цена:', 'цена:']:
-                            if l in m:
-                                data['price'] = m
-                                has_additional_info = False
-                                continue
-                        for l in ['Ревда', 'Ревды']:
-                            if l in m:
-                                data['from_revda'] = m
-                                has_additional_info = False
-                                continue
-                        for l in ['Северный', 'Северного']:
-                            if l in m:
-                                data['from_ekb'] = m
-                                has_additional_info = False
-                                continue
-                        if has_additional_info:
-                            data['additional_information'] += '\n' + m
-                    data['full_schedule'] = data['from_revda'] + '\n' + data['from_ekb']
-                    data['status'] = 'success'
-                    return data
+        for div in soup.find_all('div', attrs={'class': 'su-spoiler-content su-u-clearfix su-u-trim'}).__reversed__():
+            if 'Северный' in str(div) or 'Северного' in str(div):
+                lst = div.text.split('\n')
+                for m in lst:
+                    if 'Ревда' in m or 'Ревды' in m:
+                        data["from_revda"] = m
+                    elif 'Северный' in m or 'Северного' in m:
+                        data['from_ekb'] = m
+                    else:
+                        data['additional_information'] += '\n' + m
+                data['full_schedule'] = data['from_revda'] + '\n' + data['from_ekb']
+                data['status'] = 'success'
+                return data
