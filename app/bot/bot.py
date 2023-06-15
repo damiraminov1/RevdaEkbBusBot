@@ -1,5 +1,7 @@
+import threading
+
 import logging
-from aiogram import Bot, Dispatcher, executor, types
+from aiogram import Bot, Dispatcher, types
 
 from config import Config
 from app.parser.parser import Parser
@@ -25,7 +27,7 @@ async def start(message: types.Message):
 
 
 @dp.message_handler(content_types='text')
-async def main(message: types.Message):
+async def text(message: types.Message):
     if message.text in buttons.values():
         data = Parser.get_content(url=Config.HOST)
         if data['status'] != 'failed':

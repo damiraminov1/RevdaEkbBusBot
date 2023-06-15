@@ -1,3 +1,10 @@
-from app.bot.bot import dp, executor
+import asyncio
 
-executor.start_polling(dp, skip_updates=True)
+from app.bot.bot import bot, dp
+
+
+async def main():
+    await dp.start_polling(bot)
+
+if __name__ == "__main__":
+    asyncio.run(main())
