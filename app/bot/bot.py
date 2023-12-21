@@ -32,11 +32,11 @@ async def text(message: types.Message):
         data = Parser.get_content(url=Config.HOST)
         if data['status'] != 'failed':
             if message.text == buttons['from_revda']:
-                answer = data['price'] + '\n' + data['from_revda'] + '\n' + data['additional_information']
+                answer = data['from_revda'] + '\n' + data['additional_information']
                 await message.answer(answer)
             elif message.text == buttons['from_ekb']:
-                answer = data['price'] + '\n' + data['from_ekb'] + '\n' + data['additional_information']
+                answer = data['from_ekb'] + '\n' + data['additional_information']
                 await message.answer(answer)
             elif message.text == buttons['full_schedule']:
-                answer = data['price'] + '\n' + data['full_schedule'] + '\n' + data['additional_information']
+                answer = data['full_schedule'] + '\n' + data['additional_information']
                 await message.answer(answer)
